@@ -119,7 +119,8 @@ public class Traductor2 {
 		}
 		return str;
 	}
+	/*
 	private getPosRulesInStream () {
 		for
-	}
+	}*/
 }
