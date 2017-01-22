@@ -1,0 +1,61 @@
+//1
+{if Vprim.trad != ""
+	S.temp:="array["|| Vprim.trad;
+else
+	S.temp:=Vprim.trad;
+S.trad:="var"||V.trad||":"||S.temp||V.temp||T.trad||";\r\n    "||L.trad;
+}
+
+//2
+{
+if Vprim.trad != ""
+	S.temp:="array["|| Vprim.trad;
+else
+	S.temp:=Vprim.trad;
+S.trad:="var"||V.trad||":"||S.temp||V.temp||T.trad||";\r\n    "||L.trad;
+}
+
+//3
+{
+L.trad = ""
+}
+
+//4
+{
+V0.trad:=V1.trad;
+V0.temp:="pointer of"||V1.temp;
+}
+
+//5
+{
+V.trad:= id.valex;
+V.temp:="";
+}
+
+//6
+{
+if Vprim1.trad:=""
+	Vprim0.trad:="0.."||nint.valex-1||"] of";
+else
+	Vprim0.trad:="0.."||nint.valex-1||","||Vprim1;
+}
+
+//7
+{
+Vprim.trad:="";
+}
+
+//8
+{
+T.trad:="char";
+}
+
+//9
+{
+T.trad:="real";
+}
+
+//10
+{
+T.trad:="integer";
+}
