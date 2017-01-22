@@ -2,13 +2,11 @@
 package sintactico;
 
 
-import canonico.ColeccionCanonica;
-import canonico.EstadosCanonica;
 import herramientas.Gramatica;
 import herramientas.PSTabla;
 import herramientas.PSTupla;
+
 import java.util.ArrayList;
-import siguientes.Siguientes;
 
 
 

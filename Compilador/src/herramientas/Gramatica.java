@@ -1,7 +1,8 @@
 package herramientas;
 
 import java.util.ArrayList;
-import primeros.Primeros;
+
+import sintactico.Primeros;
 
 
 

@@ -43,6 +43,5 @@ public class VentanaNombres extends JFrame{
 		setLayout(new GridLayout(5,1));
 		setBounds(500,250,450,250);
 		setResizable(false);
-		setVisible(true);
 	}
 }

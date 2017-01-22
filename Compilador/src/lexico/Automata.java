@@ -2,7 +2,6 @@ package lexico;
 
 import java.util.Vector;
 
-import thompson.*;
 
 /*
  * La clase abstracta autómata contiene métodos para recorrer autómatas los cuales reciben un lexema y la tabla de transiciones.

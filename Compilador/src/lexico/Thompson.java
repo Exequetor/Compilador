@@ -1,17 +1,17 @@
-package thompson;
+package lexico;
 /*
  * @since 0.1
  */
 import java.util.*;
 
-import thompson.Estado;
-import thompson.Tabla;
+import lexico.Estado;
+import lexico.Tabla;
 
 public class Thompson {
 	private String exp, tempString; 
 	//private static char[] tempCharArray = new char [100];
 	
-	private final String epsilon = library.Reservadas.EPSILON;
+	private final String epsilon = herramientas.Reservadas.EPSILON;
 	private final Vector <Character> reservados = new Vector <Character> ();
 	
 	private Tabla tabFinal;

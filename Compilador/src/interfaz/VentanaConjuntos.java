@@ -1,7 +1,7 @@
 package interfaz;
 
-import conjuntos.Subconjuntos;
-import thompson.Thompson;
+import lexico.Subconjuntos;
+import lexico.Thompson;
 
 public class VentanaConjuntos {
 	private VentanaGeneral ventana;

@@ -1,7 +1,7 @@
-package conjuntos;
+package lexico;
 
 import java.util.*;
-import thompson.*;
+
 public class Subconjuntos {
 	private final String LETRA = "Letra";
 	Vector <Tabla> vectorTabla = new Vector <Tabla> ();
@@ -20,10 +20,10 @@ public class Subconjuntos {
 		tablaReferencia = tabla;
 		for (int i = 1 ; i < tabla.getAlfabeto().size() ; i++) {
 			switch (tabla.getAlfabeto().get(i)) {
-				case library.Reservadas.LETRAS:
+				case herramientas.Reservadas.LETRAS:
 					alfabeto.addElement(LETRA);
 					break;
-				case library.Reservadas.DIGITOS:
+				case herramientas.Reservadas.DIGITOS:
 					alfabeto.addElement("Digito");
 					break;
 				default:
@@ -63,11 +63,11 @@ public class Subconjuntos {
 			alfabetoTemp = new String ();
 			for (int k = 0 ; k < estado.getVectorInteger().size() ; k++) {
 				Estado estTemp = tablaReferencia.getVector().get(estado.getVectorInteger().get(k));
-				if (estTemp.getT1() != null && estTemp.getT1().getStep().equals(library.Reservadas.LETRAS)) {
+				if (estTemp.getT1() != null && estTemp.getT1().getStep().equals(herramientas.Reservadas.LETRAS)) {
 					existeLetras = true;
 					alfabetoTemp = alfabetoTemp.concat("L ");
 				}
-				if (estTemp.getT2() != null && estTemp.getT2().getStep().equals(library.Reservadas.LETRAS)) {
+				if (estTemp.getT2() != null && estTemp.getT2().getStep().equals(herramientas.Reservadas.LETRAS)) {
 					existeLetras = true;
 					alfabetoTemp = alfabetoTemp.concat("L ");
 				}

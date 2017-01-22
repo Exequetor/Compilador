@@ -1,11 +1,11 @@
-package thompson;
+package lexico;
 /*
  * @since 0.1
  */
 import java.util.*;
 
 public class Estado {
-	private final String epsilon = library.Reservadas.EPSILON;
+	private final String epsilon = herramientas.Reservadas.EPSILON;
 	
 	private int id;
 	private boolean inicio=false, fin=false;

@@ -2,7 +2,7 @@ package interfaz;
 
 import java.io.*;
 
-import thompson.*;
+import lexico.Tabla;
 
 public class  TrabajaObjetos {
 	public void guardar(Tabla tabla){

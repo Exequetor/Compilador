@@ -1,6 +1,6 @@
 package interfaz;
 
-import siguientes.Siguientes;
+import sintactico.Siguientes;
 
 public class VentanaSiguientes {
 	private VentanaGeneral ventana;

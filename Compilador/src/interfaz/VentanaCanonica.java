@@ -1,7 +1,7 @@
 package interfaz;
 
 
-import canonico.ColeccionCanonica;
+import sintactico.ColeccionCanonica;
 
 public class VentanaCanonica {
 	private VentanaGeneral ventana;

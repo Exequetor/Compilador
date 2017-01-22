@@ -29,6 +29,8 @@ public class InterfazPrincipal extends JFrame implements ActionListener {
     private JMenuItem traduccionSemantica;
 	private PanelFondo fondo;
 	
+	private VentanaNombres ventanaNombre;
+	
 	public InterfazPrincipal(){
 		super("Compilador");
 		setLayout(null);
@@ -102,6 +104,9 @@ public class InterfazPrincipal extends JFrame implements ActionListener {
 		equipo.addActionListener(this);
 		acercaDe.add(equipo);
 		
+		//Instancia de ventanas.
+		ventanaNombre = new VentanaNombres();
+		
 		//Coloca el fondo
 		fondo = new PanelFondo();
 		add(fondo,BorderLayout.CENTER);
@@ -121,7 +126,7 @@ public class InterfazPrincipal extends JFrame implements ActionListener {
     		Entrada ventanaEntrada = new Entrada(1);
 	    }
 	    if(e.getSource() == equipo){
-	    	VentanaNombres ventanaNombre = new VentanaNombres();
+	    	ventanaNombre.setVisible(true);
 	    }
 	    if(e.getSource() == conjuntos){
 	    	Entrada ventanaEntrada = new Entrada(2);

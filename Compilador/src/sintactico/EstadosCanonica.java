@@ -1,4 +1,4 @@
-package canonico;
+package sintactico;
 
 import herramientas.PSTabla;
 /*

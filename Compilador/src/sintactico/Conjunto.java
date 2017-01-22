@@ -1,4 +1,4 @@
-package primeros;
+package sintactico;
 
 import java.util.*;
 

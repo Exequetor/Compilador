@@ -1,4 +1,4 @@
-package thompson;
+package lexico;
 /*
  * @since 0.1
  */

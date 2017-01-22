@@ -1,6 +1,6 @@
 package interfaz;
 
-import thompson.Thompson;
+import lexico.Thompson;
 
 public class VentanaThompson{
 	private VentanaGeneral ventana;

@@ -1,6 +1,5 @@
-package conjuntos;
+package lexico;
 
-import thompson.*;
 import java.util.*;
 
 

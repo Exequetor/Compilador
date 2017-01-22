@@ -1,11 +1,10 @@
-package siguientes;
+package sintactico;
 
 import java.util.ArrayList;
 
 import herramientas.PSTabla;
 import herramientas.PSTupla;
 import herramientas.Gramatica;
-import primeros.Primeros;
 
 public class Siguientes {
 	PSTabla gramatica;

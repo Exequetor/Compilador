@@ -1,11 +1,6 @@
 package lexico;
 
-import thompson.Tabla;
-import thompson.Thompson;
-
 import java.util.Vector;
-
-import conjuntos.Subconjuntos;
 
 public class Tokenizer extends Automata{
 	private Vector <String> programa;

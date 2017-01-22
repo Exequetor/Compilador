@@ -3,7 +3,6 @@ package debug;
 import java.util.Vector;
 
 import lexico.*;
-import thompson.Tabla;
 
 public class TestAutomata extends Automata{
 	public TestAutomata () {

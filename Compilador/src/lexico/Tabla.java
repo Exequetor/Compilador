@@ -1,4 +1,4 @@
-package thompson;
+package lexico;
 /*
  * @since 0.1
  */
@@ -7,7 +7,7 @@ import java.util.*;
 public class Tabla {
 	public Vector <Estado> v = new Vector<Estado>();
 	private Vector <String> alfabeto = new Vector <String> ();
-	private String epsilon = library.Reservadas.EPSILON;
+	private String epsilon = herramientas.Reservadas.EPSILON;
 	
 	public Tabla (Vector <String> alf) {
 		alfabeto = alf;

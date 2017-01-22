@@ -1,8 +1,8 @@
 package debug;
 
-import conjuntos.Subconjuntos;
-import thompson.*;
-
+import lexico.Subconjuntos;
+import lexico.Tabla;
+import lexico.Thompson;
 
 public class DebugTablaSubconjuntos {
 	private String expresion;
