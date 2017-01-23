@@ -1,1 +1,1 @@
-//Programa 1 de declaración de variables.char d
+//Programa 1 de declaración de variables.char d;

@@ -13,7 +13,8 @@ public class ASPython {
 	 */
 	protected ArrayList<String> nonTerminals; 
 	private Stack <Atributo> temporales;
-	private String patchType = "null";
+	//private String patchType = "null";
+	private Integer tabsNum = 0;
 	public ASPython (String grammar) {
 		nonTerminals = new ArrayList <String> ();
 		temporales = new Stack <Atributo> ();
@@ -24,51 +25,35 @@ public class ASPython {
 	}
 	public String rule1 () {
 		String str = new String ();
-		Atributo temp, T = new Atributo (), V = new Atributo (), Vprim = new Atributo (), L = new Atributo (), S = new Atributo ("S");
-		for (int i = 0 ; i < 5 ; i++) {
+		Atributo temp, bloque_sentencias = null;
+		for (int i = 0 ; i < 3 ; i++) {
 			temp = temporales.pop();
-			if (temp.getName().equals("T"))
-				T = new Atributo (temp);
-			if (temp.getName().equals("V"))
-				V = new Atributo (temp);
-			if (temp.getName().equals("V'"))
-				Vprim = new Atributo (temp);
-			if (temp.getName().equals("L"))
-				L = new Atributo (temp);
+			if (temp.getName().equals("bloque_sentencias"))
+				bloque_sentencias = new Atributo (temp);
 		}
-		if (!Vprim.getTrad().equals(Eps()))
-			S.setTemp("array [" + Vprim.getTrad());
-		else
-			S.setTemp(Vprim.getTrad());
-		str = "var " + V.getTrad() + ":" + S.getTemp() + V.getTemp() + T.getTrad() + ";\r\n    " + L.getTrad();
-		S.setTrad(str);
-		temporales.push(S);
+		str = bloque_sentencias.getTrad();
+		temporales.push(new Atributo ("programa", str));
 		return str;
 	}
 	public String rule2 () {
-		String str;
-		Atributo temp, V = new Atributo (), Vprim = new Atributo (), L = new Atributo ();
-		for (int i = 0 ; i < 4 ; i++) {
+		String str = new String ();
+		Atributo temp, lista_sentencias = null;
+		for (int i = 0 ; i < 3 ; i++) {
 			temp = temporales.pop();
-			if (temp.getName().equals("V"))
-				V = new Atributo (temp);
-			if (temp.getName().equals("V'"))
-				Vprim = new Atributo (temp);
-			if (temp.getName().equals("L"))
-				L = new Atributo (temp);
+			if (temp.getName().equals("lista_sentencias"))
+				lista_sentencias = new Atributo (temp);
 		}
-		if (!Vprim.getTrad().equals(Eps())) 
-			L.setTemp("array [" + Vprim.getTrad());
-		else
-			L.setTemp(Vprim.getTrad());
-		str = V.getTrad() + ":" + L.getTemp() + V.getTemp() + patchType + ";\r\n    " + L.getTrad();
-		temporales.push(new Atributo ("L", str, L.getTemp()));
+		str = lista_sentencias.getTrad();
+		temporales.push(new Atributo ("bloque_sentencias", str));
 		return str;
 	}
 	public String rule3 () {
 		String str = new String ();
+		for (int i = 0 ; i < 5 ; i++) {
+			temporales.pop();
+		}
 		str = Eps();
-		temporales.push(new Atributo ("L", Eps()));
+		temporales.push(new Atributo ("includes", Eps()));
 		return str;
 	}
 	public String rule4 () {
@@ -79,20 +64,16 @@ public class ASPython {
 			if (temp.getName().equals("V"))
 				V = new Atributo (temp);
 		}
-		str = V.getTrad();
-		temporales.push(new Atributo ("V", str, "pointer of " + V.getTemp()));
+		
 		return str;
 	}
 	public String rule5 () {
 		String str = new String ();
-		Atributo temp, id = new Atributo ();
-		for (int i = 0 ; i < 1 ; i++) {
-			temp = temporales.pop();
-			if (temp.getName().equals("id"))
-				id = new Atributo (temp); 
+		for (int i = 0 ; i < 4 ; i++) {
+			temporales.pop();
 		}
-		str = id.getTrad();
-		temporales.push (new Atributo ("V", str, Eps()));
+		str = Eps();
+		temporales.push(new Atributo ("header"));
 		return str;
 	}
 	public String rule6 () {
@@ -105,41 +86,48 @@ public class ASPython {
 			if (temp.getName().equals("V'"))
 				Vprim = new Atributo (temp);
 		}
-		if (Vprim.getTrad().equals(Eps()))
-			str = "0.." + (Integer.parseInt(nint.getTrad()) - 1) + "] of ";
-		else
-			str = "0.." + (Integer.parseInt(nint.getTrad()) - 1)  + ", " + Vprim.getTrad();
-		temporales.push (new Atributo ("V'", str));
+		
 		return str;
 	}
 	public String rule7 () {
 		String str = new String ();
-		str = Eps();
-		temporales.push(new Atributo ("V'", str));
+		int tabs = tabsNum;
+		Atributo temp, literal = null, more_args = null, lista_sentencias = null, printf = null;
+		for (int i = 0 ; i < 6 ; i++) {
+			temp = temporales.pop();
+			switch (temp.getName()) {
+			case "printf":
+				printf = new Atributo (temp);
+				break;
+			case "literal":
+				literal = new Atributo (temp);
+				break;
+			case "more_args":
+				more_args = new Atributo (temp);
+				break;
+			case "lista_sentencias":
+				lista_sentencias = new Atributo (temp);
+			}
+		}
+		while (tabs-- > 0)
+			str += "\n";
+		str += "print(" + literal.getTrad() + more_args.getTrad() + ")\n" + lista_sentencias.getTrad();
+		temporales.push(new Atributo ("lista_sentencias", str));
 		return str;
 	}
 	public String rule8 () {
 		String str = new String ();
-		temporales.pop();
-		str = "char";
-		patchType = str;
-		temporales.push(new Atributo ("T", str));
+		
 		return str;
 	}
 	public String rule9 () {
 		String str = new String ();
-		temporales.pop();
-		str = "real";
-		patchType = str;
-		temporales.push(new Atributo ("T", str));
+		
 		return str;
 	}
 	public String rule10 () {
 		String str = new String ();
-		temporales.pop();
-		str = "integer";
-		patchType = str;
-		temporales.push(new Atributo ("T", str));
+		
 		return str;
 	}
 	public String rule11 () {
@@ -154,7 +142,8 @@ public class ASPython {
 	}
 	public String rule13 () {
 		String str = new String ();
-		
+		str = Eps();
+		temporales.push(new Atributo ("lista_sentencias", str));
 		return str;
 	}
 	public String rule14 () {
@@ -359,7 +348,8 @@ public class ASPython {
 	}
 	public String rule54 () {
 		String str = new String ();
-		
+		str = Eps();
+		temporales.push(new Atributo ("more_args", str));
 		return str;
 	}
 	public String rule55 () {

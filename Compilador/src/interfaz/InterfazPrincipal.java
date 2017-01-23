@@ -26,7 +26,8 @@ public class InterfazPrincipal extends JFrame implements ActionListener {
 	private JMenuItem canonica;
 	private JMenuItem analisisSintactico;
     private JMenuItem tas;
-    private JMenuItem traduccionSemantica;
+    private JMenuItem traduccionPascal;
+    private JMenuItem traduccionPython;
 	private PanelFondo fondo;
 	
 	private VentanaNombres ventanaNombre;
@@ -92,11 +93,16 @@ public class InterfazPrincipal extends JFrame implements ActionListener {
 		analisisSintactico.addActionListener(this);
 		analisisSintactico.setBackground(Color.BLACK);
 		analisisSintactico.setForeground(new Color(0,128,255));
-		traduccionSemantica = new JMenuItem ("Traductor");
-		traduccionSemantica.addActionListener(this);
-		traduccionSemantica.setBackground(Color.BLACK);
-		traduccionSemantica.setForeground(new Color (0,128,255));
-		semantico.add(traduccionSemantica);
+		traduccionPascal = new JMenuItem ("Traductor: Pascal");
+		traduccionPascal.addActionListener(this);
+		traduccionPascal.setBackground(Color.BLACK);
+		traduccionPascal.setForeground(new Color (0,128,255));
+		semantico.add(traduccionPascal);
+		traduccionPython = new JMenuItem ("Traductor: Python");
+		traduccionPython.addActionListener(this);
+		traduccionPython.setBackground(Color.BLACK);
+		traduccionPython.setForeground(new Color (0,128,255));
+		semantico.add(traduccionPython);
 		analizadorSintactico.add(analisisSintactico);
 		equipo = new JMenuItem("Integrantes del Equipo");
 		equipo.setBackground(Color.BLACK);
@@ -176,18 +182,36 @@ public class InterfazPrincipal extends JFrame implements ActionListener {
 		    	}
 		    }
 	    }
-        if (e.getSource() == traduccionSemantica) {
+        if (e.getSource() == traduccionPascal) {
         	AbrirArchivo abrirReservadas = new AbrirArchivo ("Reservadas.txt");	    	
 		    if(abrirReservadas.getFlag()){
 		    	AbrirArchivo abrirSimbolos = new AbrirArchivo ("Simbolos.txt");
 		    	if(abrirSimbolos.getFlag()){
 		    		Abrir abrirGramatica = new Abrir ("Abrir gram\u00e1tica");
 		    		if (abrirGramatica.respuesta == JFileChooser.APPROVE_OPTION) {
-		    			AbrirPrograma accionesSemanticas = new AbrirPrograma ("Abrir Acciones Semanticas", "", "");
+		    			AbrirPrograma accionesSemanticas = new AbrirPrograma ("Abrir Acciones Semanticas", "Archivo de Acciones sem\u00e1nticas", "acs");
 		    			if (accionesSemanticas.respuesta == JFileChooser.APPROVE_OPTION) {
 				    		AbrirPrograma codigoFuente = new AbrirPrograma ("Archivo de c\u00f3digo fuente");
 						   	if(codigoFuente.respuesta == JFileChooser.APPROVE_OPTION){
-						   		VentanaTraduccion ventanaTraduccion = new VentanaTraduccion (codigoFuente, abrirSimbolos.getExpresion(), abrirReservadas.getExpresion(), abrirGramatica.temp, codigoFuente.getArchiveName());
+						   		VentanaTraduccion ventanaTraduccion = new VentanaTraduccion (codigoFuente, abrirSimbolos.getExpresion(), abrirReservadas.getExpresion(), abrirGramatica.temp, codigoFuente.getArchiveName(), VentanaTraduccion.PASCAL);
+						   	}
+			    		}
+		    		}
+		    	}
+		    }
+        }
+        if (e.getSource() == traduccionPython) {
+        	AbrirArchivo abrirReservadas = new AbrirArchivo ("Reservadas.txt");	    	
+		    if(abrirReservadas.getFlag()){
+		    	AbrirArchivo abrirSimbolos = new AbrirArchivo ("Simbolos.txt");
+		    	if(abrirSimbolos.getFlag()){
+		    		Abrir abrirGramatica = new Abrir ("Abrir gram\u00e1tica");
+		    		if (abrirGramatica.respuesta == JFileChooser.APPROVE_OPTION) {
+		    			AbrirPrograma accionesSemanticas = new AbrirPrograma ("Abrir Acciones Semanticas", "Archivo de Acciones sem\u00e1nticas", "acs");
+		    			if (accionesSemanticas.respuesta == JFileChooser.APPROVE_OPTION) {
+				    		AbrirPrograma codigoFuente = new AbrirPrograma ("Archivo de c\u00f3digo fuente");
+						   	if(codigoFuente.respuesta == JFileChooser.APPROVE_OPTION){
+						   		VentanaTraduccion ventanaTraduccion = new VentanaTraduccion (codigoFuente, abrirSimbolos.getExpresion(), abrirReservadas.getExpresion(), abrirGramatica.temp, codigoFuente.getArchiveName(), VentanaTraduccion.PYTHON);
 						   	}
 			    		}
 		    		}

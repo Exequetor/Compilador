@@ -1,0 +1,144 @@
+1 programa includes header bloque_sentencias													1	{programa.trad:=includes.trad || header.trad || bloque_sentencias.trad}
+2 bloque_sentencias { lista_sentencias }														2	{bloque_sentencias.trad:=lista_sentencias.trad}
+3 includes # include < stdio.h >																3	{includes.trad:=""}
+4 header main ( )																				4	{header.trad:=""}
+5 header int main ( )																			5	{header.trad:=""}
+6 header void main ( )																			6 	{header.trad:=""}
+7 lista_sentencias printf ( literal more_args ) ; lista_sentencias								7	{
+																									 si(lo llama una estrutura_case)
+																									    lista_sentencias.trad:="print(" || more_args.trad || ")" || "\n" || lista_sentencias1.trad || Default.trad
+																									 si(lo llama el do_while)
+																									   lista_sentencias.trad:=lista_sentencias.temp || "=input(" || literal.valex || ")\n" || lista_sentencias1.trad
+																									 si es otra regla
+																									    lista_sentencias.trad:="print(" || literal.valex || more_args.trad || ")\n" || lista_sentencias1.trad
+																									}
+8 lista_sentencias scanf ( literal more_args ) ; lista_sentencias								8	{lista_sentencias.trad:=lista_sentencias1.trad || more_args.trad}
+9 lista_sentencias declaracion_var ; lista_sentencias											9	{lista_sentencias.trad:=declaracion_var.trad || lista_sentencias1.trad}
+10 lista_sentencias asignaciones ; lista_sentencias												10 	{lista_sentencias.trad:=asignaciones.trad || "\n" || lista_sentencias1.trad}
+11 lista_sentencias estructura_control lista_sentencias											11 	{lista_sentencias.trad:=estructura_control.trad || "\n"|| lista_sentencias.trad}
+12 lista_sentencias return expresion ; lista_sentencias											12 	{lista_sentencias.trad:=""}
+13 lista_sentencias Eps																			13 	{lista_sentencias.trad:=""}
+14 constanteNum nint																			14 	{constanteNum.trad:=nint.valex}
+15 constanteNum - nint																			15	{constanteNum.trad:="-"|| nint.valex}
+16 constanteNum nfloat																			16	{constanteNum.trad:=nfloat.valex}
+17 constanteNum - nfloat																		17	{constanteNum.trad:="-" || nfloat.valex}
+18 constanteLit literal																			18	{constanteLit.trad:= literal.valex}
+19 constanteLitc literalc																		19	{constanteLit.trad:= literalc.valex}
+constanteGeneral constanteNum																	20	{constanteGeneral.trad:=constanteNum.trad}
+constanteGeneral constanteLit																	21	{constanteGeneral.trad:=constanteLit.trad}
+constanteGeneral constanteLitc																	22	{constanteGeneral.trad:=constanteLitc.trad}
+apuntadores *																					23	{apuntadores.trad:=""}
+apuntadores memReferencia																		24	{apuntadores.trad:=""}
+memReferencia &																					25	{memReferencia.trad:=""}
+memReferencia Eps																			    26	{memReferencia.trad:=""}
+declaracion_var tipo more_id next_var															27	{declaracion_var.trad:=""}
+tipo int																						28	{tipo.trad:=""}
+tipo float																						29	{tipo.trad:=""}
+tipo char																						30	{tipo.trad:=""}
+tipo double																						31	{tipo.trad:=""}
+apuntador * apuntador																			32	{apuntador.trad:=""}
+apuntador id																					33	{apuntador.trad:=id.valex}
+more_id apuntador matrix																		34	{more_id.trad:=apuntador.trad || matrix.trad}
+next_var , more_id next_var																		35	{next_var.trad:=""}
+next_var Eps																					36	{next_var.trad:=""}																		
+matrix [ nint ] matrix																			37	{matrix.trad:=""}
+matrix Eps																						38	{matrix.trad:=""}
+asignaciones more_id = expresion																39	{asignaciones.trad:=more_id.trad || "=" || expresion.trad}
+asignaciones more_id + +																		40	{asignaciones.trad:=more_id.tra || "+=1\n"}
+asignaciones more_id - -																		41	{asignaciones.trad:=more_id.tra || "-=1\n"}
+asignaciones more_id = constanteLit																42	{asignaciones.trad:=more_id.tra || constanteLit.trad}
+asignaciones more_id = constanteLitc														    43	{asignaciones.trad:=more_id.tra || constanteLitc.trad}
+expresion expresion + expresion																	44	{expresion.trad:=expresion11.trad || "+" || expresion12.trad}	
+expresion expresion * expresion																	45	{expresion.trad:=expresion11.trad || "*" || expresion12.trad}	
+expresion expresion / expresion																    46	{expresion.trad:=expresion11.trad || "/" || expresion12.trad}	
+expresion expresion % expresion																	47	{expresion.trad:=expresion11.trad || "%" || expresion12.trad}	
+expresion ( expresion )																			48	{expresion.trad:="(" ||expresion.trad || ")"}	
+expresion more_id																				49	{expresion.trad:=more_id.trad}
+expresion constanteNum																			50	{expresion.trad:constanteNum.trad}
+more_args , id more_args																		51	{
+																										si(lo llama un print)
+																										  more_args.trad:="," || id.valex || more_args1.trad
+																										si(lo llama un scanf)
+																										   more_args.trad:=id.valex
+																									    si lo llama otra regla
+																											 more_args.trad:=id.valex || more_args1.trad
+																										 
+																									}
+more_args , apuntadores id more_args															52	{si(lo llama el scanf)
+																										more_args.trad:=id.valex
+																									si no
+																								    	more_args.trad:=""}
+																									}
+53 more_args , constanteGeneral more_args
+more_args Eps																					54	{more_args.trad:=""}
+estructura_control estructura_if																55	{estructura_control.trad:=estructura_if.trad}
+estructura_control estructura_while																56	{estructura_control.trad:=estructura_while.trad}
+estructura_control estructura_for																57	{estructura_control.trad:=estructura_for.trad}
+estructura_control estructura_switch															58	{estructura_control.trad:=estructura_switch.trad}
+estructura_control estructura_do_while															59	{estructura_control.trad:=estructura_do_while.trad}
+estructura_if if ( expresionLogica ) { lista_sentencias } estructura_else						60	{estructura_if.trad:="if" || expresionLogica.trad || ":\n\t" ||lista_sentencias.trad || "\n" || estructura_else.trad }
+estructura_else else { lista_sentencias }														61	{estructura_else.trad:="elif" || lista_sentencias.trad}
+estructura_else Eps																				62	{estructura_else.trad:=""}
+estructura_while while ( expresionLogica ) { lista_sentencias }									63	{estructura_while.trad:="while" ||expresionLogica.trad || ":\n\t" ||lista_sentencias.trad}
+estructura_do_while do { lista_sentencias } while ( expresionLogica ) ;							64	{estructura_do_while.trad:="while" || expresionLogica.trad || ":\n\t" || lista_sentencias.trad}
+estructura_for for ( inicializaciones ; expresionLogica ; asignacion_for ) { lista_sentencias }	65	{estructura_for.trad:="for" || inicializaciones.trad || "in range" || expresionLogica.trad}
+estructura_switch switch ( id ) { estructura_case Default }										66	{estructura_switch.trad:=estructura_case.trad}
+estructura_case case nint : lista_sentencias Break estructura_case								67	{estrutura_case.trad:="elif" || tipo.estructura_switch || "==" || nint.valex || ":\n\t" || lista_sentencias.trad}
+estructura_case Eps																				68	{estructura_case.trad:=""}
+Default default : lista_sentencias																69	{Default.trad:="else:\n\t" || lista_sentencias.trad}
+Default Eps																						70	{Default.trad:=""}	
+Break break ;																					80	{Break.trad:=""}
+Break Eps																						90	{Break.trad:=""}
+asignacion_for id + + otra_asignacion_for														100	{si(lo llama un for)
+																										asignacion_for.trad:=""
+																									}
+asignacion_for id - - otra_asignacion_for														101	{asignacion_for.trad:=""}
+asignacion_for id + = nint otra_asignacion_for													102	{asignacion_for.trad:=""}
+asignacion_for + + id otra_asignacion_for														103	{asignacion_for.trad:=""}
+asignacion_for - - id otra_asignacion_for														104	{asignacion_for.trad:=""}
+otra_asignacion_for Eps																			105	{otra_asignacion_for.trad:=""}
+otra_asignacion_for , asignacion_for															106	{otra_asignacion_for.trad:=""}
+inicializaciones id = nint otra_inicializaciones												107	{inicializaciones.trad:= id.valex}
+otra_inicializaciones Eps																		108	{inicializaciones.trad:=""}
+otra_inicializaciones , inicializaciones														109	{inicializaciones.trad:= ""}
+expresionLogica expresionLogica & & expresionLogica												110	{expresionLogica.trad:=expresionLogica1.trad || "and" ||expresionLogica2.trad}
+expresionLogica expresionLogica | | expresionLogica												111	{expresionLogica.trad:=expresionLogica1.trad || "or" ||expresionLogica2.trad}}
+expresionLogica expresionLogica ! = expresionLogica												112	{expresionLogica.trad:=expresionLogica1.trad || "!=" ||expresionLogica2.trad}
+expresionLogica expresionLogica = = id															113	{si(la llama el for)
+																										expresionLogica.trad:="(" || id.valex || ")"
+																									expresionLogica.trad:=expresionLogica1.trad || "==" || id.valex
+																									}
+expresionLogica expresionLogica = = nint														114	{si(la llama el for)
+																										expresionLogica.trad:="(" || nint.valex || ")"
+																									si no
+																									    expresionLogica.trad:=expresionLogica1.trad || "==" || nint.valex
+																									}
+expresionLogica expresionLogica > = id															115	{expresionLogica.trad:=expresionLogica.trad ||">=" || id.valex}
+expresionLogica expresionLogica > = nint                                                        116	{expresionLogica.trad:= expresionLogica.trad || ">=" || id.valex}
+expresionLogica expresionLogica < = id															117	{si(la llama el for)
+																										expresionLogica.trad:="(" || id.valex || ")"
+																									si no
+																									  expresionLogica.trad:= expresionLogica.trad || "<=" || id.valex
+																									}
+expresionLogica expresionLogica < = nint														118	{si(la llama el for)
+																										expresionLogica.trad:="(" || nint.valex || ")"
+																									si no
+																									   expresionLogica.trad:= expresionLogica.trad || "<=" || nint.valex
+																									}
+expresionLogica expresionLogica < id															119	{si(la llama el for)
+																										expresionLogica.trad:="(" || id.valex-1 || ")"
+																									sino
+																									   expresionLogica.trad:= expresionLogica.trad || "<" || id.valex
+																									}
+expresionLogica expresionLogica < nint															120	{si(la llama el for)
+																										expresionLogica.trad:="(" || nint.valex-1 || ")"
+																									si no
+																									   expresionLogica.trad:= expresionLogica.trad || "<" || nint.valex
+																									}
+expresionLogica expresionLogica > id															121	{expresionLogica.trad:= expresionLogica.trad || ">" || id.valex}
+expresionLogica expresionLogica > nint															122	{expresionLogica.trad:= expresionLogica.trad || ">" || nint.valex}
+expresionLogica ! expresionLogica																123	{expresionLogica.trad:= expresionLogica.trad || "not" || expresionLogica.trad}
+expresionLogica ( expresionLogica )																124	{expresionLogica.trad:= "(! || expresionLogica.trad ||")"}
+expresionLogica id																				125	{expresionLogica.trad:=id.valex}
+expresionLogica nint																			126	{expresionLogica.trad:=nint.valex}
+expresionLogica - nint																			127	{expresionLogica.trad:="-" || nint.valex}

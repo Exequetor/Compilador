@@ -13,7 +13,7 @@ import lexico.Token;
 import sintactico.AnalizadorSintactico;
 import sintactico.Atributo;
 
-public class Traductor {
+public class TraductorPascal {
 	private Map <Integer, Atributo[]> history;
 	private AnalizadorSintactico pilaAS;
 	private ASPython acciones;
@@ -21,7 +21,7 @@ public class Traductor {
 	private String salida;
 	private Stack <Token> temp;
 	private boolean succes = false;
-	public Traductor (Vector <String> prog, Vector <String> vectorReservadas, Vector <String> vectorSimbolos, String grammar) {
+	public TraductorPascal (Vector <String> prog, Vector <String> vectorReservadas, Vector <String> vectorSimbolos, String grammar) {
 		acciones = new ASPython (grammar);
 		pilaAS = new AnalizadorSintactico (prog, vectorReservadas, vectorSimbolos, grammar);
 		history = pilaAS.getPointerHistorial();

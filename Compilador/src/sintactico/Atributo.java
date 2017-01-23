@@ -58,7 +58,14 @@ public class Atributo {
 	}
 	@Override
 	public String toString () {
-		return "(" + name + " | " + trad + "|" + temp + ")";
+		String str = "(" + name;
+		if (!trad.equals("") && trad != null)
+			str += " | " + trad;
+		if (!temp.equals("[Default temp]"))
+			str += " $ " + temp;
+		str += ")";
+		//str = "(" + name + " | " + trad + "|" + temp + ")";
+		return str;
 		//return "(" + name + " | " + trad + ")";
 	}
 }

@@ -10,13 +10,7 @@ lista_sentencias declaracion_var ; lista_sentencias
 lista_sentencias asignaciones ; lista_sentencias
 lista_sentencias estructura_control lista_sentencias
 lista_sentencias return expresion ; lista_sentencias
-lista_sentencias id ( ) ; lista_sentencias
-lista_sentencias new_asig lista_sentencias
 lista_sentencias Eps
-new_asig id + + ; new_asig
-new_asig id - - ; new_asig
-new_asig id + = nint ; new_asig
-new_asig Eps
 constanteNum nint
 constanteNum - nint
 constanteNum nfloat
@@ -28,6 +22,8 @@ constanteGeneral constanteLit
 constanteGeneral constanteLitc
 apuntadores *
 apuntadores memReferencia
+memReferencia &
+memReferencia Eps
 declaracion_var tipo more_id next_var
 tipo int
 tipo float
@@ -35,14 +31,16 @@ tipo char
 tipo double
 apuntador * apuntador
 apuntador id
-memReferencia &
-memReferencia Eps
 more_id apuntador matrix
 next_var , more_id next_var
 next_var Eps
-matrix [ expresion ] matrix
+matrix [ nint ] matrix
 matrix Eps
 asignaciones more_id = expresion
+asignaciones more_id + +
+asignaciones more_id - -
+asignaciones more_id = constanteLit
+asignaciones more_id = constanteLitc
 expresion expresion + expresion
 expresion expresion * expresion
 expresion expresion / expresion
